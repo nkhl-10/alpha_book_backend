@@ -1,10 +1,7 @@
-from django.db import IntegrityError
 from rest_framework import serializers
 
 from .models import User, Category, Address, Book, Transaction, BookReadAccess
 from .models.book import BookImage
-
-
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -29,7 +26,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["__all__"]
+        fields = '__all__'
 
 
 
@@ -56,7 +53,10 @@ class BookImageSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    images = BookImageSerializer(many=True, required=False)  # Change 'image' to 'images' and set required=False
+    images = BookImageSerializer(many=True, required=False)# Change 'image' to 'images' and set required=False
+    category = CategorySerializer(read_only=True)  # ✅ Include category details
+    location = AddressSerializer(read_only=True) # ✅ Include location details
+
 
     class Meta:
         model = Book

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 from django.conf.global_settings import AUTH_USER_MODEL
@@ -41,20 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-party apps
     'rest_framework',
-    'rest_framework.authtoken',  # Required for Token authentication
+    # 'rest_framework.authtoken',  # Required for Token authentication
 
     # Custom apps
     'api',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-}
+
+
+MEDIA_URL = '/media/'  # ✅ URL path for accessing media files
+MEDIA_ROOT = os.path.join( os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'media')  # ✅ Physical storage path for uploaded files
+
+
 
 
 MIDDLEWARE = [

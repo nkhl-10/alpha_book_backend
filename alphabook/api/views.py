@@ -1,12 +1,9 @@
 from django.contrib.auth import authenticate
-from django.db import transaction, IntegrityError
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.authtoken.models import Token  # Correct import
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.exceptions import ValidationError
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from .models import User, Book, Transaction
@@ -15,18 +12,16 @@ from .serializers import RegisterSerializer, BookImageSerializer
 from .serializers import UserSerializer, BookSerializer, TransactionSerializer
 
 
-
 @api_view(['POST'])
-@permission_classes([AllowAny])  # Allow anyone to register
 def register(request):
     serializer = RegisterSerializer(data=request.data)
 
     # Validate the input data
     if serializer.is_valid():
         user = serializer.save()  # Save the user
-        token, _ = Token.objects.get_or_create(user=user)  # Create authentication token
+        # token, _ = Token.objects.get_or_create(user=user)  # Create authentication token
         return Response({
-            "token": token.key,
+            # "token": token.key,
             "username": user.username
         }, status=status.HTTP_201_CREATED)
 
@@ -39,15 +34,16 @@ def register(request):
 
 # Login API
 @api_view(['POST'])
-@permission_classes([AllowAny])  # Allow anyone to access this API
 def login(request):
     username = request.data.get('username')
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
 
     if user:
-        token, _ = Token.objects.get_or_create(user=user)  # Ensure correct import
-        return Response({'token': token.key, 'username': user.username}, status=status.HTTP_200_OK)
+        # token, _ = Token.objects.get_or_create(user=user)  # Ensure correct import
+        return Response({
+            # 'token': token.key,
+            'username': user.username}, status=status.HTTP_200_OK)
 
     return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -57,14 +53,12 @@ def login(request):
 class UserListCreateAPIView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]  # Require authentication
 
 # Book API
 class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     parser_classes = [MultiPartParser, FormParser]
-    permission_classes = [IsAuthenticated]  # Require authentication
 
     def create(self, request, *args, **kwargs):
         images_data = request.FILES.getlist('images')
@@ -82,10 +76,8 @@ class BookListCreateAPIView(generics.ListCreateAPIView):
 class TransactionListCreateAPIView(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    permission_classes = [IsAuthenticated]  # Require authentication
 
 # Book API
 class BookImagesListCreateAPIView(generics.ListCreateAPIView):
     queryset = BookImage.objects.all()
     serializer_class = BookImageSerializer
-    permission_classes = [IsAuthenticated]  # Require authentication
