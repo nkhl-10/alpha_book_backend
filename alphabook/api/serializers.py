@@ -13,21 +13,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             'email': {'required': True},
         }
 
-
     def create(self, validated_data):
         """Create a new user."""
         return User.objects.create_user(**validated_data)
-
-
-
-
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
-
 
 
 
@@ -46,6 +34,16 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'street', 'city', 'state', 'zip_code', 'latitude', 'longitude']
 
 
+
+class UserSerializer(serializers.ModelSerializer):
+
+    location = AddressSerializer(read_only = True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password', 'phone', 'avatar','street', 'city', 'state', 'zip_code', 'latitude', 'longitude']
+
+
 class BookImageSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
 
@@ -61,10 +59,10 @@ class BookImageSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    images = BookImageSerializer(many=True, required=False)# Change 'image' to 'images' and set required=False
-    category = CategorySerializer(read_only=True)  # ✅ Include category details
-    location = AddressSerializer(read_only=True) # ✅ Include location details
-
+    images = BookImageSerializer(many=True, required=False)  # Change 'image' to 'images' and set required=False
+    category = CategorySerializer(read_only=True)
+    location = AddressSerializer(read_only=True)
+    pdf_file = serializers.SerializerMethodField()
 
     class Meta:
         model = Book

@@ -11,7 +11,7 @@ from .views import (
 urlpatterns = [
     path('register', register, name='register'),
     path('login', login, name='login'),
-    path('users', UserListCreateAPIView.as_view(), name='users'),
+    path('users/<int:pk>/', UserListCreateAPIView.as_view(), name='users'),
     path('books', BookListCreateAPIView.as_view(), name='book-list-create'),
     path('transactions', TransactionListCreateAPIView.as_view(), name='transaction-list-create'),
     path('getBooks/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
@@ -24,8 +24,4 @@ urlpatterns = [
     path('userByOrderedBooks/<int:user_id>/', OrderedBooksAPIView.as_view(), name='getBookOrdered'),
 
     path('search/', SearchBookAPIView.as_view(), name='search-books'),
-]
-
-# Only include static media files in development mode
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

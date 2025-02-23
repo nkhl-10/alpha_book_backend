@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="change url with image">
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="more api setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/alphabook/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/alphabook/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/book.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/alphabook/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/alphabook/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
@@ -95,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739898359192</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="more api setup">
+      <option name="closed" value="true" />
+      <created>1740311463336</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740311463336</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -103,6 +112,7 @@
     <MESSAGE value="user table in minor changes" />
     <MESSAGE value="fix api login and registration" />
     <MESSAGE value="change url with image" />
-    <option name="LAST_COMMIT_MESSAGE" value="change url with image" />
+    <MESSAGE value="more api setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="more api setup" />
   </component>
 </project>

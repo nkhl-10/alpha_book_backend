@@ -42,13 +42,15 @@ def login(request):
         # token, _ = Token.objects.get_or_create(user=user)  # Ensure correct import
         return Response({
             # 'token': token.key,
-            'username': user.username}, status=status.HTTP_200_OK)
+            'username': user.username,
+            'id' : user.id
+        }, status=status.HTTP_200_OK)
 
     return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # User API
-class UserListCreateAPIView(generics.ListCreateAPIView):
+class UserListCreateAPIView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

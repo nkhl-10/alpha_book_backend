@@ -9,6 +9,7 @@ from .models.book import BookImage
 class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'password', 'email', 'is_active', 'created_at')
     search_fields = ('username', 'email')
+    fields = ('username', 'email', 'password', 'phone', 'avatar', 'is_active','location')
     list_filter = ('is_active', 'created_at')
 
 
