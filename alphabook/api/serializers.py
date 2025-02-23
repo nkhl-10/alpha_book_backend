@@ -37,11 +37,9 @@ class AddressSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
 
-    location = AddressSerializer(read_only = True)
-
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'phone', 'avatar','street', 'city', 'state', 'zip_code', 'latitude', 'longitude']
+        fields = ['id', 'username', 'email', 'password', 'phone', 'avatar']
 
 
 class BookImageSerializer(serializers.ModelSerializer):

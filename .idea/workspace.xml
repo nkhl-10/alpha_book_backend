@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="more api setup">
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Refactor user-related APIs and serializers&#10;&#10;Updated the user API to use `RetrieveAPIView` and refined serializers to include location and address details. Adjusted fields in the admin panel to accommodate new user data. Fixed URL patterns for user endpoints and cleaned up redundant code.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/alphabook/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/alphabook/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +99,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740311463336</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Refactor user-related APIs and serializers&#10;&#10;Updated the user API to use `RetrieveAPIView` and refined serializers to include location and address details. Adjusted fields in the admin panel to accommodate new user data. Fixed URL patterns for user endpoints and cleaned up redundant code.">
+      <option name="closed" value="true" />
+      <created>1740316373767</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1740316373767</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -113,6 +116,7 @@
     <MESSAGE value="fix api login and registration" />
     <MESSAGE value="change url with image" />
     <MESSAGE value="more api setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="more api setup" />
+    <MESSAGE value="Refactor user-related APIs and serializers&#10;&#10;Updated the user API to use `RetrieveAPIView` and refined serializers to include location and address details. Adjusted fields in the admin panel to accommodate new user data. Fixed URL patterns for user endpoints and cleaned up redundant code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor user-related APIs and serializers&#10;&#10;Updated the user API to use `RetrieveAPIView` and refined serializers to include location and address details. Adjusted fields in the admin panel to accommodate new user data. Fixed URL patterns for user endpoints and cleaned up redundant code." />
   </component>
 </project>
