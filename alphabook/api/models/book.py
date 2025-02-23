@@ -6,6 +6,7 @@ class Book(models.Model):
         ('resell', 'Resell'),
         ('new', 'New'),
         ('pdf', 'PDF'),
+        ('free_book', 'Free Book'),
     ]
     READ_ACCESS_CHOICES = [
         ('free', 'Free'),

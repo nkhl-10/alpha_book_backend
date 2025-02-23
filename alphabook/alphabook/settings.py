@@ -49,10 +49,8 @@ INSTALLED_APPS = [
 
 
 
-MEDIA_URL = '/media/'  # ✅ URL path for accessing media files
-MEDIA_ROOT = os.path.join( os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'media')  # ✅ Physical storage path for uploaded files
-
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 MIDDLEWARE = [

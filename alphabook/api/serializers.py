@@ -47,9 +47,17 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class BookImageSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = BookImage
-        fields = ['id', 'image', 'uploaded_at']
+        fields = ['id', 'image_url']
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if obj.image and request:
+            return request.build_absolute_uri(obj.image.url)
+        return None
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -70,6 +78,12 @@ class BookSerializer(serializers.ModelSerializer):
         for image_data in images_data:
             BookImage.objects.create(book=book, **image_data)
         return book
+
+    def get_pdf_file(self, obj):
+        request = self.context.get('request')
+        if obj.pdf_file and request:
+            return request.build_absolute_uri(obj.pdf_file.url)
+        return None
 
 
 # Transaction Serializer
