@@ -4,8 +4,8 @@ from django.urls import path
 from .views import (
     register, login, UserListCreateAPIView,
     BookListCreateAPIView, TransactionListCreateAPIView,
-    BookImagesListCreateAPIView, BookDetailView, BuyBookAPIView, AvailableBooksAPIView, CategoryListAPIView,
-    BooksByCategoryAPIView, BooksByUserAPIView, OrderedBooksAPIView, SearchBookAPIView,
+    BookImagesListCreateAPIView, BookDetailView, AvailableBooksAPIView, CategoryListAPIView,
+    BooksByCategoryAPIView, BooksByUserAPIView, OrderedBooksAPIView, SearchBookAPIView,BuyBookAPIView,
 )
 
 urlpatterns = [
@@ -16,7 +16,7 @@ urlpatterns = [
     path('transactions', TransactionListCreateAPIView.as_view(), name='transaction-list-create'),
     path('getBooks/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
 
-    path('buyBook/', BuyBookAPIView.as_view(), name='buy-book'),
+    path('buyBook', BuyBookAPIView.as_view(), name='buy-book'),
     path('getBooks', AvailableBooksAPIView.as_view(), name='getBookList'),
     path('categories/', CategoryListAPIView.as_view(), name='getCategory'),
     path('categories/<int:category_id>/', BooksByCategoryAPIView.as_view(), name='getCategoryByBook'),

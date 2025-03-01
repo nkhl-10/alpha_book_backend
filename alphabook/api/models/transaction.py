@@ -9,7 +9,7 @@ class Transaction(models.Model):
     ]
 
     id = models.AutoField(primary_key=True)
-    book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='transactions')
+    book = models.ForeignKey('Book', on_delete=models.CASCADE,unique=True, related_name='transactions')
     buyer = models.ForeignKey('User', on_delete=models.CASCADE, related_name='purchases')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=10, choices=TRANSACTION_STATUS_CHOICES, default='pending')

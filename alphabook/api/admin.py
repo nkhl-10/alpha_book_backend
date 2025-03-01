@@ -7,9 +7,9 @@ from .models.book import BookImage
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'password', 'email', 'is_active', 'created_at')
+    list_display = ('id', 'username', 'password', 'email', 'is_active', 'created_at','avatar')
     search_fields = ('username', 'email')
-    list_editable  = ('username', 'email')
+    list_editable  = ('username', 'email','avatar')
     list_filter = ('is_active', 'created_at')
 
 
@@ -34,6 +34,7 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'seller', 'category', 'price', 'book_type', 'read_access', 'created_at')
     search_fields = ('title', 'author', 'seller__username')
     list_filter = ('book_type', 'read_access', 'category')
+    editable_fields = ('seller',)
 
 
 # Transaction Admin

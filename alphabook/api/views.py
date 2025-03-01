@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate
 from django.db.models import Q
+from django.template.context_processors import request
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.authtoken.models import Token  # Correct import
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
@@ -43,7 +45,7 @@ def login(request):
         return Response({
             # 'token': token.key,
             'username': user.username,
-            'id' : user.id
+            'id': user.id
         }, status=status.HTTP_200_OK)
 
     return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
@@ -85,16 +87,36 @@ class BuyBookAPIView(generics.CreateAPIView):
     serializer_class = TransactionSerializer
 
     def perform_create(self, serializer):
-        book = serializer.validated_data['book']
-
-        if book.seller == self.request.user:
-            return Response({"error": "You cannot buy your own book"}, status=status.HTTP_400_BAD_REQUEST)
-
-        if book.book_type in ['free_book', 'pdf'] and book.read_access == 'free':
-            return Response({"message": "You can access this book for free.",
-                             "pdf_url": book.pdf_file.url if book.pdf_file else None})
-
-        serializer.save(buyer=self.request.user, amount=book.price, status='pending')
+        data = self.request.data
+        user_id = data.get("buyerId")
+        book_id = data.get("bookId")
+        amount = data.get("amount")
+        if not user_id or not book_id:
+            raise ValidationError({"error": "user_id and book_id are required."})
+        try:
+            user = User.objects.get(id=user_id)
+            book = Book.objects.get(id=book_id)
+        except User.DoesNotExist:
+            raise ValidationError({"error": "Invalid user ID."})
+        except Book.DoesNotExist:
+            raise ValidationError({"error": "Invalid book ID."})
+        if book.seller == user:
+            raise ValidationError({"error": "You cannot buy your own book."})
+        if book.book_type in ["free_book", "pdf"] and book.read_access == "free":
+            return Response(
+                {"message": "You can access this book for free.",
+                 "pdf_url": book.pdf_file.url if book.pdf_file else None},
+                status=status.HTTP_200_OK,
+            )
+        if amount is None: amount = book.price
+        transaction = Transaction.objects.create(
+            buyer=user,
+            book=book,
+            amount=amount,
+            status="pending"
+        )
+        return Response({"message": "Transaction created.", "transaction_id": transaction.id},
+                        status=status.HTTP_201_CREATED)
 
 
 # Book API
@@ -108,26 +130,6 @@ class BookDetailView(RetrieveAPIView):
     serializer_class = BookSerializer
 
 
-
-
-class BuyBookAPIView(generics.CreateAPIView):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
-
-    def perform_create(self, serializer):
-        book = serializer.validated_data['book']
-        if book.seller == self.request.user:
-            return Response({"error": "You cannot buy your own book."}, status=status.HTTP_400_BAD_REQUEST)
-        if book.book_type in ['resell', 'new']:
-            if Transaction.objects.filter(book=book, status='completed').exists():
-                return Response({"error": "This book has already been sold."}, status=status.HTTP_400_BAD_REQUEST)
-        transaction = serializer.save(buyer=self.request.user, amount=book.price, status='pending')
-        if book.book_type == 'pdf':
-            BookReadAccess.objects.create(user=self.request.user, book=book, access_granted=True, payment=transaction)
-
-        return Response(TransactionSerializer(transaction).data, status=status.HTTP_201_CREATED)
-
-
 class OrderedBooksAPIView(generics.ListAPIView):
     serializer_class = TransactionSerializer
 
@@ -136,14 +138,12 @@ class OrderedBooksAPIView(generics.ListAPIView):
         return Transaction.objects.filter(buyer_id=user_id, status='completed')
 
 
-
 class BooksByUserAPIView(generics.ListAPIView):
     serializer_class = BookSerializer
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return Book.objects.filter(seller_id=user_id)
-
 
 
 class BooksByCategoryAPIView(generics.ListAPIView):
@@ -156,12 +156,9 @@ class BooksByCategoryAPIView(generics.ListAPIView):
         ) | Book.objects.filter(category_id=category_id, book_type='pdf')
 
 
-
 class CategoryListAPIView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
-
 
 
 class AvailableBooksAPIView(generics.ListAPIView):
@@ -169,10 +166,6 @@ class AvailableBooksAPIView(generics.ListAPIView):
         transactions__status='completed'
     ) | Book.objects.filter(book_type='pdf')  # PDFs are always available
     serializer_class = BookSerializer
-
-
-
-
 
 
 class SearchBookAPIView(generics.ListAPIView):
@@ -185,5 +178,6 @@ class SearchBookAPIView(generics.ListAPIView):
             Q(description__icontains=query) |  # Search in description
             Q(category__name__icontains=query)  # Search in category name
         ).exclude(
-            id__in=Transaction.objects.filter(book__book_type__in=['resell', 'new'], status='completed').values_list('book_id', flat=True)
+            id__in=Transaction.objects.filter(book__book_type__in=['resell', 'new'], status='completed').values_list(
+                'book_id', flat=True)
         )
