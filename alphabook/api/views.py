@@ -4,7 +4,7 @@ from django.template.context_processors import request
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.authtoken.models import Token  # Correct import
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 from .models import User, Book, Transaction, BookReadAccess, Category
 from .models.book import BookImage
-from .serializers import RegisterSerializer, BookImageSerializer, CategorySerializer
+from .serializers import RegisterSerializer, BookImageSerializer, CategorySerializer, UserAvatarSerializer
 from .serializers import UserSerializer, BookSerializer, TransactionSerializer
 
 
@@ -59,7 +59,7 @@ class UserListCreateAPIView(RetrieveAPIView):
 
 # Book API
 class BookListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Book.objects.all()
+    queryset = Book.objects.filter(is_sold=False)
     serializer_class = BookSerializer
     parser_classes = [MultiPartParser, FormParser]
 
@@ -96,6 +96,14 @@ class BuyBookAPIView(generics.CreateAPIView):
         try:
             user = User.objects.get(id=user_id)
             book = Book.objects.get(id=book_id)
+
+            if book.is_sold:
+                raise ValidationError({"error": "This book has already been sold."})
+
+                # ✅ Set the book as sold
+            book.is_sold = True
+            book.save()
+
         except User.DoesNotExist:
             raise ValidationError({"error": "Invalid user ID."})
         except Book.DoesNotExist:
@@ -131,12 +139,11 @@ class BookDetailView(RetrieveAPIView):
 
 
 class OrderedBooksAPIView(generics.ListAPIView):
-    serializer_class = TransactionSerializer
+    serializer_class = BookSerializer
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Transaction.objects.filter(buyer_id=user_id, status='completed')
-
+        return Book.objects.filter(transactions__buyer_id=user_id)
 
 class BooksByUserAPIView(generics.ListAPIView):
     serializer_class = BookSerializer
@@ -162,7 +169,7 @@ class CategoryListAPIView(generics.ListAPIView):
 
 
 class AvailableBooksAPIView(generics.ListAPIView):
-    queryset = Book.objects.filter(book_type__in=['resell', 'new']).exclude(
+    queryset = Book.objects.filter(book_type__in=['resell', 'new'],is_sold=False).exclude(
         transactions__status='completed'
     ) | Book.objects.filter(book_type='pdf')  # PDFs are always available
     serializer_class = BookSerializer
@@ -181,3 +188,25 @@ class SearchBookAPIView(generics.ListAPIView):
             id__in=Transaction.objects.filter(book__book_type__in=['resell', 'new'], status='completed').values_list(
                 'book_id', flat=True)
         )
+
+
+
+@api_view(["POST"])  # Change from UpdateAPIView to a function-based view
+@parser_classes([MultiPartParser, FormParser])
+def upload_avatar(request):
+    user_id = request.data.get("user_id")
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = UserAvatarSerializer(user, data=request.data, partial=True)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            {"message": "Avatar uploaded successfully", "avatar": user.avatar.url},
+            status=status.HTTP_200_OK
+        )
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

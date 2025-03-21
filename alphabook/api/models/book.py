@@ -25,6 +25,7 @@ class Book(models.Model):
     description = models.TextField(blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     seller = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+    is_sold = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     condition = models.CharField(max_length=10, choices=CONDITION_CHOICES, default='good')
     book_type = models.CharField(max_length=10, choices=BOOK_TYPE_CHOICES, default='resell')

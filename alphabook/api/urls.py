@@ -5,7 +5,7 @@ from .views import (
     register, login, UserListCreateAPIView,
     BookListCreateAPIView, TransactionListCreateAPIView,
     BookImagesListCreateAPIView, BookDetailView, AvailableBooksAPIView, CategoryListAPIView,
-    BooksByCategoryAPIView, BooksByUserAPIView, OrderedBooksAPIView, SearchBookAPIView,BuyBookAPIView,
+    BooksByCategoryAPIView, BooksByUserAPIView, OrderedBooksAPIView, SearchBookAPIView, BuyBookAPIView, upload_avatar,
 )
 
 urlpatterns = [
@@ -22,6 +22,7 @@ urlpatterns = [
     path('categories/<int:category_id>/', BooksByCategoryAPIView.as_view(), name='getCategoryByBook'),
     path('userByBooks/<int:user_id>', BooksByUserAPIView.as_view(), name='getBookByUser'),
     path('userByOrderedBooks/<int:user_id>/', OrderedBooksAPIView.as_view(), name='getBookOrdered'),
+    path('uploadAvatar/', upload_avatar, name='upload-avatar'),
 
     path('search/', SearchBookAPIView.as_view(), name='search-books'),
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

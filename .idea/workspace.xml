@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Refactor user-related APIs and serializers&#10;&#10;Updated the user API to use `RetrieveAPIView` and refined serializers to include location and address details. Adjusted fields in the admin panel to accommodate new user data. Fixed URL patterns for user endpoints and cleaned up redundant code.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/alphabook/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/alphabook/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/models/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/book.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/models/transaction.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/transaction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/db.sqlite3" afterDir="false" />
@@ -28,6 +29,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nkhl-10&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nkhl-10/alpha_book_backend.git&quot;,
+    &quot;accountId&quot;: &quot;0ae8d648-3132-4434-8356-4b233f36198c&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
