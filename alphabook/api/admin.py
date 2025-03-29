@@ -27,14 +27,13 @@ class AddressAdmin(admin.ModelAdmin):
     search_fields = ('city', 'state')
     list_filter = ('state',)
 
-
 # Book Admin
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'seller', 'category', 'price', 'book_type', 'read_access', 'created_at')
-    search_fields = ('title', 'author', 'seller__username')
-    list_filter = ('book_type', 'read_access', 'category')
-    editable_fields = ('seller',)
+    list_display = ('id', 'title', 'is_sold','location','seller', 'category', 'price', 'book_type', 'read_access', 'created_at')
+    search_fields = ('title', 'author', 'is_sold', 'seller__username')
+    list_filter = ('book_type', 'read_access', 'is_sold', 'category')
+    list_editable = ('seller','is_sold','location')
 
 
 # Transaction Admin

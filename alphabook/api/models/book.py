@@ -24,6 +24,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
+    location = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True)
     seller = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
     is_sold = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
@@ -31,7 +32,6 @@ class Book(models.Model):
     book_type = models.CharField(max_length=10, choices=BOOK_TYPE_CHOICES, default='resell')
     pdf_file = models.FileField(upload_to='book_pdfs/', blank=True, null=True)
     read_access = models.CharField(max_length=10, choices=READ_ACCESS_CHOICES, blank=True, null=True)
-    location = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True, related_name='books')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

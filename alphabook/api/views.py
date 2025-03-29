@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.db import IntegrityError
 from django.db.models import Q
 from django.template.context_processors import request
 from rest_framework import generics
@@ -9,10 +10,12 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from .models import User, Book, Transaction, BookReadAccess, Category
+from .models import User, Book, Transaction, BookReadAccess, Category, Address
 from .models.book import BookImage
-from .serializers import RegisterSerializer, BookImageSerializer, CategorySerializer, UserAvatarSerializer
+from .serializers import RegisterSerializer, BookImageSerializer, CategorySerializer, UserAvatarSerializer, \
+    AddressSerializer, BookUploadSerializer
 from .serializers import UserSerializer, BookSerializer, TransactionSerializer
 
 
@@ -60,20 +63,32 @@ class UserListCreateAPIView(RetrieveAPIView):
 # Book API
 class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.filter(is_sold=False)
-    serializer_class = BookSerializer
+    serializer_class = BookUploadSerializer
     parser_classes = [MultiPartParser, FormParser]
 
     def create(self, request, *args, **kwargs):
-        images_data = request.FILES.getlist('images')
-        book_data = request.data
-        book_serializer = self.get_serializer(data=book_data)
-        book_serializer.is_valid(raise_exception=True)
-        book = book_serializer.save()
+        try:
+            images_data = request.FILES.getlist('images')
+            book_data = request.data
+            book_serializer = self.get_serializer(data=book_data)
+            book_serializer.is_valid(raise_exception=True)
+            book = book_serializer.save()
+            for image_data in images_data:
+                BookImage.objects.create(book=book, image=image_data)
 
-        for image_data in images_data:
-            BookImage.objects.create(book=book, image=image_data)
+            return Response(book_serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response(book_serializer.data, status=status.HTTP_201_CREATED)
+        except ValidationError as e:
+            print(str(e))
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        except IntegrityError as e:
+            print(str(e))
+            return Response({"error": "Database error: " + str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        except Exception as e:
+            print(str(e))
+            return Response({"error": "Something went wrong: " + str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # Transaction API
@@ -168,6 +183,14 @@ class CategoryListAPIView(generics.ListAPIView):
     serializer_class = CategorySerializer
 
 
+class SearchCategory(APIView):
+    def get(self, request):
+        query = request.GET.get("query", "")  # Get search query from request
+        categories = Category.objects.filter(Q(name__icontains=query))  # Search in category name
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
+
+
 class AvailableBooksAPIView(generics.ListAPIView):
     queryset = Book.objects.filter(book_type__in=['resell', 'new'],is_sold=False).exclude(
         transactions__status='completed'
@@ -210,3 +233,14 @@ def upload_avatar(request):
         )
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AddressListCreateView(generics.ListCreateAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+
+class UserAddressListView(generics.ListAPIView):
+    serializer_class = AddressSerializer
+    def get_queryset(self):
+        user = self.kwargs['user_id']
+        return Address.objects.filter(user=user)

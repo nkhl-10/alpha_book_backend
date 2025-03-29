@@ -55,15 +55,24 @@ class BookImageSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     images = BookImageSerializer(many=True, required=False)
-    category = CategorySerializer(read_only=True)
-    location = AddressSerializer(read_only=True)
+    category = CategorySerializer(read_only=False)
+    location = AddressSerializer(read_only=False)
+
+    class Meta:
+        model = Book
+        fields = '__all__'
+        read_only_fields = ['id',  'created_at', 'updated_at']
+
+
+class BookUploadSerializer(serializers.ModelSerializer):
+    images = BookImageSerializer(many=True, required=False)
     pdf_file = serializers.SerializerMethodField()
 
     class Meta:
         model = Book
         fields = '__all__'
         extra_kwargs = {'pdf_file': {'required': False}}
-        read_only_fields = ['id', 'category', 'seller', 'created_at', 'updated_at']
+        read_only_fields = ['id',  'created_at', 'updated_at']
 
     def create(self, validated_data):
         images_data = validated_data.pop('images', [])
