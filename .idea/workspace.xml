@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment=" upload image">
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="book upload and some functionality are add">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/alphabook/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/alphabook/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/address.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/address.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/book.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742580590931</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="book upload and some functionality are add">
+      <option name="closed" value="true" />
+      <created>1743265724962</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1743265724962</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -144,7 +144,8 @@
     <MESSAGE value="more api setup" />
     <MESSAGE value="Refactor user-related APIs and serializers&#10;&#10;Updated the user API to use `RetrieveAPIView` and refined serializers to include location and address details. Adjusted fields in the admin panel to accommodate new user data. Fixed URL patterns for user endpoints and cleaned up redundant code." />
     <MESSAGE value=" upload image" />
-    <option name="LAST_COMMIT_MESSAGE" value=" upload image" />
+    <MESSAGE value="book upload and some functionality are add" />
+    <option name="LAST_COMMIT_MESSAGE" value="book upload and some functionality are add" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
