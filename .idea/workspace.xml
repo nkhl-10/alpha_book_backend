@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="book upload and some functionality are add">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,16 +149,5 @@
     <MESSAGE value=" upload image" />
     <MESSAGE value="book upload and some functionality are add" />
     <option name="LAST_COMMIT_MESSAGE" value="book upload and some functionality are add" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" log-message="true" suspend="NONE" type="python-line">
-          <url>file://$PROJECT_DIR$/alphabook/api/serializers.py</url>
-          <line>55</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

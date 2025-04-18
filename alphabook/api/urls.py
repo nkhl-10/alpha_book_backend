@@ -5,7 +5,7 @@ from .views import (
     register, login, UserListCreateAPIView,
     BookListCreateAPIView, TransactionListCreateAPIView, BookDetailView, AvailableBooksAPIView, CategoryListAPIView,
     BooksByCategoryAPIView, BooksByUserAPIView, OrderedBooksAPIView, SearchBookAPIView, BuyBookAPIView, upload_avatar,
-    AddressListCreateView, UserAddressListView, SearchCategory,
+    AddressListCreateView, UserAddressListView, SearchCategory, AddressUpdateAPIView, AddressDeleteAPIView,
 )
 
 urlpatterns = [
@@ -28,6 +28,10 @@ urlpatterns = [
 
                   path('search/', SearchBookAPIView.as_view(), name='search-books'),
                   path('addresses/', AddressListCreateView.as_view(), name='address-list-create'),  # GET, POST
+                  path('addressesUpdate/<int:id>/', AddressUpdateAPIView.as_view(), name='address-update'),
+                  path('addressesDelete/<int:id>/', AddressDeleteAPIView.as_view(), name='address-delete'),
+
+
                   path('addresses/<int:user_id>/', UserAddressListView.as_view(), name='address-detail'),  # GET, PUT, DELETE
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

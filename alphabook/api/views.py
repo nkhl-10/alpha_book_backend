@@ -239,6 +239,19 @@ class AddressListCreateView(generics.ListCreateAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
+
+class AddressUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    lookup_field = 'id'  # This allows editing by address ID
+
+
+class AddressDeleteAPIView(generics.DestroyAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    lookup_field = 'id'  # Delete by address ID
+
+
 class UserAddressListView(generics.ListAPIView):
     serializer_class = AddressSerializer
     def get_queryset(self):
