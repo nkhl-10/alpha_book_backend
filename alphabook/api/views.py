@@ -92,7 +92,7 @@ class BookListCreateAPIView(generics.ListCreateAPIView):
 
 
 # Transaction API
-class TransactionListCreateAPIView(generics.ListCreateAPIView):
+class TransactionListAPIView(generics.RetrieveAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 
@@ -154,18 +154,34 @@ class BookDetailView(RetrieveAPIView):
 
 
 class OrderedBooksAPIView(generics.ListAPIView):
+    serializer_class = TransactionSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return Transaction.objects.filter(buyer_id=user_id, status='pending')
+
+class SoldBookAPIView(generics.ListAPIView):
+    serializer_class = TransactionSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return Transaction.objects.filter(book__seller_id=user_id, status='pending')
+
+
+class TransactionAPIView(generics.ListAPIView):
+    serializer_class = TransactionSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return Transaction.objects.filter(book__seller_id=user_id, status='pending')
+
+
+class YourBookApiView(generics.ListAPIView):
     serializer_class = BookSerializer
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Book.objects.filter(transactions__buyer_id=user_id)
-
-class BooksByUserAPIView(generics.ListAPIView):
-    serializer_class = BookSerializer
-
-    def get_queryset(self):
-        user_id = self.kwargs['user_id']
-        return Book.objects.filter(seller_id=user_id)
+        return Book.objects.filter(seller_id=user_id, is_sold=False)
 
 
 class BooksByCategoryAPIView(generics.ListAPIView):

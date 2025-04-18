@@ -95,7 +95,7 @@ class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = ['id', 'book', 'buyer', 'amount', 'status', 'transaction_date']
+        fields = ['id', 'book', 'buyer', 'amount', 'status', 'transaction_date','otp']
 
 
 # BookReadAccess Serializer

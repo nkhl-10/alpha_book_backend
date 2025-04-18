@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="book upload and some functionality are add">
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="add address edit and delete api">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/models/transaction.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/transaction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/db.sqlite3" afterDir="false" />
@@ -136,7 +138,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743265724962</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add address edit and delete api">
+      <option name="closed" value="true" />
+      <created>1744968393329</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744968393329</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -148,6 +158,7 @@
     <MESSAGE value="Refactor user-related APIs and serializers&#10;&#10;Updated the user API to use `RetrieveAPIView` and refined serializers to include location and address details. Adjusted fields in the admin panel to accommodate new user data. Fixed URL patterns for user endpoints and cleaned up redundant code." />
     <MESSAGE value=" upload image" />
     <MESSAGE value="book upload and some functionality are add" />
-    <option name="LAST_COMMIT_MESSAGE" value="book upload and some functionality are add" />
+    <MESSAGE value="add address edit and delete api" />
+    <option name="LAST_COMMIT_MESSAGE" value="add address edit and delete api" />
   </component>
 </project>
