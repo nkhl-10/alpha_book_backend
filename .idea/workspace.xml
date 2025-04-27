@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations.">
-      <change afterPath="$PROJECT_DIR$/alphabook/api/models/syllabus.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/book.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745743756263</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books.">
+      <option name="closed" value="true" />
+      <created>1745753672187</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745753672187</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -183,6 +181,7 @@
     <MESSAGE value="add address edit and delete api" />
     <MESSAGE value="final commit for all set" />
     <MESSAGE value="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations." />
+    <MESSAGE value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books." />
   </component>
 </project>
