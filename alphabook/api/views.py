@@ -1,18 +1,16 @@
 from django.contrib.auth import authenticate
 from django.db import IntegrityError
 from django.db.models import Q
-from django.template.context_processors import request
 from rest_framework import generics
 from rest_framework import status
-from rest_framework.authtoken.models import Token  # Correct import
-from rest_framework.decorators import api_view, permission_classes, parser_classes
+from rest_framework.decorators import api_view, parser_classes
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import User, Book, Transaction, BookReadAccess, Category, Address
+from .models import User, Book, Transaction, Category, Address
 from .models.book import BookImage
 from .serializers import RegisterSerializer, BookImageSerializer, CategorySerializer, UserAvatarSerializer, \
     AddressSerializer, BookUploadSerializer
@@ -148,10 +146,6 @@ class BookImagesListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = BookImageSerializer
 
 
-class BookDetailView(RetrieveAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-
 
 class OrderedBooksAPIView(generics.ListAPIView):
     serializer_class = TransactionSerializer
@@ -189,9 +183,7 @@ class BooksByCategoryAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         category_id = self.kwargs['category_id']
-        return Book.objects.filter(category_id=category_id, book_type__in=['resell', 'new']).exclude(
-            transactions__status='completed'
-        ) | Book.objects.filter(category_id=category_id, book_type='pdf')
+        return Book.objects.filter(category_id=category_id,is_sold=False)
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -207,10 +199,13 @@ class SearchCategory(APIView):
         return Response(serializer.data)
 
 
+class BookDetailView(RetrieveAPIView):
+    queryset = Book.objects.filter(is_sold=False)
+    serializer_class = BookSerializer
+
+
 class AvailableBooksAPIView(generics.ListAPIView):
-    queryset = Book.objects.filter(book_type__in=['resell', 'new'],is_sold=False).exclude(
-        transactions__status='completed'
-    ) | Book.objects.filter(book_type='pdf')  # PDFs are always available
+    queryset = Book.objects.filter(is_sold=False)
     serializer_class = BookSerializer
 
 

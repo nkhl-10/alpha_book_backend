@@ -41,10 +41,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()  # Attach the custom UserManager
 
-    USERNAME_FIELD = 'username'
+    # create a normal user
+    #USERNAME_FIELD = 'username'
 
-    # USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['username']
+    # create a admin
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
         return self.username

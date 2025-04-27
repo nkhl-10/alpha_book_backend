@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Category, Address, Book, Transaction, BookReadAccess
+from .models import User, Category, Address, Book, Transaction, BookReadAccess, SyllabusBook
 
 # User Admin
 from .models.book import BookImage
@@ -56,3 +56,7 @@ class BookReadAccessAdmin(admin.ModelAdmin):
 @admin.register(BookImage)
 class BookImageAdmin(admin.ModelAdmin):
     list_display = ('image',)
+
+@admin.register(SyllabusBook)
+class SyllabusBookAdmin(admin.ModelAdmin):
+    list_display = ('course_name', 'book', 'university_name', 'semester')

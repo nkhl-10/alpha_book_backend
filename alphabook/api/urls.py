@@ -8,7 +8,6 @@ from .views import (
     AddressListCreateView, UserAddressListView, SearchCategory, AddressUpdateAPIView, AddressDeleteAPIView,
     SoldBookAPIView,
 )
-
 urlpatterns = [
                   path('register', register, name='register'),
                   path('login', login, name='login'),
@@ -16,9 +15,9 @@ urlpatterns = [
                   path('books', BookListCreateAPIView.as_view(), name='book-list-create'),
                   path('transactions/<int:pk>/', TransactionListAPIView.as_view(), name='transaction-list-create'),
                   path('getBooks/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
+                  path('getBooks', AvailableBooksAPIView.as_view(), name='getBookList'),
 
                   path('buyBook', BuyBookAPIView.as_view(), name='buy-book'),
-                  path('getBooks', AvailableBooksAPIView.as_view(), name='getBookList'),
                   path('categories/', CategoryListAPIView.as_view(), name='getCategory'),
                   path('searchCategories/', SearchCategory.as_view(), name='searchCategories'),
 
@@ -37,3 +36,4 @@ urlpatterns = [
                   path('addresses/<int:user_id>/', UserAddressListView.as_view(), name='address-detail'),  # GET, PUT, DELETE
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import User, Category, Address, Book, Transaction, BookReadAccess
+from .models import User, Category, Address, Book, Transaction, BookReadAccess, SyllabusBook
 from .models.book import BookImage
 
 
@@ -53,10 +53,17 @@ class BookImageSerializer(serializers.ModelSerializer):
         return None
 
 
+class SyllabusBookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SyllabusBook
+        fields = ['course_name',  'university_name', 'semester', 'subjects']
+
+
 class BookSerializer(serializers.ModelSerializer):
     images = BookImageSerializer(many=True, required=False)
     category = CategorySerializer(read_only=False)
     location = AddressSerializer(read_only=False)
+    syllabus = SyllabusBookSerializer(read_only=False)
 
     class Meta:
         model = Book

@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="final commit for all set">
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations.">
+      <change afterPath="$PROJECT_DIR$/alphabook/api/models/syllabus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/alphabook/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/alphabook/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/models/book.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/book.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +42,9 @@
     &quot;accountId&quot;: &quot;0ae8d648-3132-4434-8356-4b233f36198c&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -151,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745000226436</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations.">
+      <option name="closed" value="true" />
+      <created>1745743756263</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745743756263</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -165,6 +182,7 @@
     <MESSAGE value="book upload and some functionality are add" />
     <MESSAGE value="add address edit and delete api" />
     <MESSAGE value="final commit for all set" />
-    <option name="LAST_COMMIT_MESSAGE" value="final commit for all set" />
+    <MESSAGE value="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations." />
   </component>
 </project>

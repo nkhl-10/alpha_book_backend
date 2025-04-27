@@ -22,6 +22,7 @@ class Book(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100, blank=True)
+    publication = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     location = models.ForeignKey('Address', on_delete=models.SET_NULL, null=True)
