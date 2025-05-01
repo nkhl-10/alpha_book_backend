@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # create a normal user
     #USERNAME_FIELD = 'username'
 
-    # create a admin
+    # create  admin
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 

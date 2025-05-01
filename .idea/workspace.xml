@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books." />
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated related serializers, views, URLs, and admin configuration to support the new model. Enhanced the `Book` model with a `publication` field and refined query logic to improve book filtering.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745753672187</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated related serializers, views, URLs, and admin configuration to support the new model. Enhanced the `Book` model with a `publication` field and refined query logic to improve book filtering.">
+      <option name="closed" value="true" />
+      <created>1745777726619</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745777726619</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -182,6 +195,7 @@
     <MESSAGE value="final commit for all set" />
     <MESSAGE value="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations." />
     <MESSAGE value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books." />
+    <MESSAGE value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated related serializers, views, URLs, and admin configuration to support the new model. Enhanced the `Book` model with a `publication` field and refined query logic to improve book filtering." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated related serializers, views, URLs, and admin configuration to support the new model. Enhanced the `Book` model with a `publication` field and refined query logic to improve book filtering." />
   </component>
 </project>

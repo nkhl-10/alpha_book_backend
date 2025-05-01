@@ -146,13 +146,13 @@ class BookImagesListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = BookImageSerializer
 
 
-
 class OrderedBooksAPIView(generics.ListAPIView):
     serializer_class = TransactionSerializer
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return Transaction.objects.filter(buyer_id=user_id, status='pending')
+
 
 class SoldBookAPIView(generics.ListAPIView):
     serializer_class = TransactionSerializer
@@ -183,7 +183,7 @@ class BooksByCategoryAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         category_id = self.kwargs['category_id']
-        return Book.objects.filter(category_id=category_id,is_sold=False)
+        return Book.objects.filter(category_id=category_id, is_sold=False)
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -222,7 +222,6 @@ class SearchBookAPIView(generics.ListAPIView):
             id__in=Transaction.objects.filter(book__book_type__in=['resell', 'new'], status='completed').values_list(
                 'book_id', flat=True)
         )
-
 
 
 @api_view(["POST"])  # Change from UpdateAPIView to a function-based view
@@ -265,6 +264,28 @@ class AddressDeleteAPIView(generics.DestroyAPIView):
 
 class UserAddressListView(generics.ListAPIView):
     serializer_class = AddressSerializer
+
     def get_queryset(self):
         user = self.kwargs['user_id']
         return Address.objects.filter(user=user)
+
+
+class ConfirmTransactionView(RetrieveAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+    def post(self, request):
+        transaction_id = request.data.get('transaction_id')
+        otp = request.data.get('otp')
+        if not transaction_id or not otp:
+            return Response({'error': 'Transaction ID and OTP are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        transaction = self.get_queryset().filter(id=transaction_id).first()
+        if not transaction:
+            return Response({'message': 'Transaction not found.'}, status=status.HTTP_404_NOT_FOUND)
+        if transaction.otp != otp:
+            return Response({'message': 'Invalid OTP!'}, status=status.HTTP_400_BAD_REQUEST)
+        transaction.status = 'completed'
+        transaction.book.is_sold = True
+        transaction.save()
+        transaction.book.save()
+        return Response({'message': 'Transaction completed successfully!'}, status=status.HTTP_200_OK)
