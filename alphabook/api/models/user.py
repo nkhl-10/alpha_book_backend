@@ -27,9 +27,11 @@ class UserManager(BaseUserManager):
 
         return self.create_user(username, email, password, **extra_fields)
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     phone = models.CharField(max_length=10, blank=True)
@@ -42,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()  # Attach the custom UserManager
 
     # create a normal user
-    #USERNAME_FIELD = 'username'
+    # USERNAME_FIELD = 'username'
 
     # create  admin
     USERNAME_FIELD = 'username'

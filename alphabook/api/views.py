@@ -5,7 +5,7 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView, RetrieveUpdateAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -20,18 +20,13 @@ from .serializers import UserSerializer, BookSerializer, TransactionSerializer
 @api_view(['POST'])
 def register(request):
     serializer = RegisterSerializer(data=request.data)
-
-    # Validate the input data
     if serializer.is_valid():
-        user = serializer.save()  # Save the user
-        # token, _ = Token.objects.get_or_create(user=user)  # Create authentication token
+        user = serializer.save()
         return Response({
-            # "token": token.key,
-            "username": user.username
+            "username": user.username,
+            "message": "Registration successful"
         }, status=status.HTTP_201_CREATED)
-
-    # If data is invalid, return the validation errors
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response("Registration failed. Please check the input", status=status.HTTP_400_BAD_REQUEST)
 
 
 # Login API
@@ -53,7 +48,7 @@ def login(request):
 
 
 # User API
-class UserListCreateAPIView(RetrieveAPIView):
+class UserListCreateAPIView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

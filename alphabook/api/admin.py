@@ -7,9 +7,9 @@ from .models.book import BookImage
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'password', 'email', 'is_active', 'created_at','avatar')
+    list_display = ('id', 'username', 'email', 'is_active', 'name','phone','avatar')
     search_fields = ('username', 'email')
-    list_editable  = ('username', 'email','avatar')
+    list_editable  = ('username', 'email','avatar','name','phone')
     list_filter = ('is_active', 'created_at')
 
 
@@ -23,9 +23,10 @@ class CategoryAdmin(admin.ModelAdmin):
 # Address Admin
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'city', 'state', 'zip_code', 'created_at')
+    list_display = ('user', 'city', 'state', 'zip_code','latitude','longitude')
     search_fields = ('city', 'state')
     list_filter = ('state',)
+    list_editable = ('latitude','longitude')
 
 # Book Admin
 @admin.register(Book)

@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated related serializers, views, URLs, and admin configuration to support the new model. Enhanced the `Book` model with a `publication` field and refined query logic to improve book filtering.">
+    <list default="true" id="35933347-9821-4490-bc96-d037f9271200" name="Changes" comment="Add ConfirmTransactionView to handle transaction confirmations&#10;&#10;Introduced `ConfirmTransactionView` to validate transactions via OTP and complete them. Updated `urls.py` to add the corresponding endpoint. Minor formatting fixes were applied to improve code consistency.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphabook/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphabook/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphabook/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphabook/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745777726619</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add ConfirmTransactionView to handle transaction confirmations&#10;&#10;Introduced `ConfirmTransactionView` to validate transactions via OTP and complete them. Updated `urls.py` to add the corresponding endpoint. Minor formatting fixes were applied to improve code consistency.">
+      <option name="closed" value="true" />
+      <created>1746089316672</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1746089316672</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -196,6 +205,7 @@
     <MESSAGE value="Update allowed hosts and comment potential username changes&#10;&#10;The `ALLOWED_HOSTS` setting has been updated to replace an IP address. Additionally, comments have been added in the `User` model to indicate a potential shift to using email as the `USERNAME_FIELD`. These changes prepare the system for future adjustments while securing current configurations." />
     <MESSAGE value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated serializers, views, URLs, and admin configuration to accommodate the new model. Adjusted `Book` model to include a `publication` field and refined logic in queries to filter unsold books." />
     <MESSAGE value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated related serializers, views, URLs, and admin configuration to support the new model. Enhanced the `Book` model with a `publication` field and refined query logic to improve book filtering." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add SyllabusBook model and integrate with related modules&#10;&#10;Introduced the `SyllabusBook` model with fields for course, university, semester, and subjects. Updated related serializers, views, URLs, and admin configuration to support the new model. Enhanced the `Book` model with a `publication` field and refined query logic to improve book filtering." />
+    <MESSAGE value="Add ConfirmTransactionView to handle transaction confirmations&#10;&#10;Introduced `ConfirmTransactionView` to validate transactions via OTP and complete them. Updated `urls.py` to add the corresponding endpoint. Minor formatting fixes were applied to improve code consistency." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add ConfirmTransactionView to handle transaction confirmations&#10;&#10;Introduced `ConfirmTransactionView` to validate transactions via OTP and complete them. Updated `urls.py` to add the corresponding endpoint. Minor formatting fixes were applied to improve code consistency." />
   </component>
 </project>
