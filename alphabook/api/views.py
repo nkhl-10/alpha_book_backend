@@ -37,9 +37,7 @@ def login(request):
     user = authenticate(username=username, password=password)
 
     if user:
-        # token, _ = Token.objects.get_or_create(user=user)  # Ensure correct import
         return Response({
-            # 'token': token.key,
             'username': user.username,
             'id': user.id
         }, status=status.HTTP_200_OK)
@@ -72,15 +70,12 @@ class BookListCreateAPIView(generics.ListCreateAPIView):
             return Response(book_serializer.data, status=status.HTTP_201_CREATED)
 
         except ValidationError as e:
-            print(str(e))
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
         except IntegrityError as e:
-            print(str(e))
             return Response({"error": "Database error: " + str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         except Exception as e:
-            print(str(e))
             return Response({"error": "Something went wrong: " + str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -99,16 +94,11 @@ class BuyBookAPIView(generics.CreateAPIView):
         user_id = data.get("buyerId")
         book_id = data.get("bookId")
         amount = data.get("amount")
-        if not user_id or not book_id:
-            raise ValidationError({"error": "user_id and book_id are required."})
+        if not user_id or not book_id: raise ValidationError({"error": "user_id and book_id are required."})
         try:
             user = User.objects.get(id=user_id)
             book = Book.objects.get(id=book_id)
-
-            if book.is_sold:
-                raise ValidationError({"error": "This book has already been sold."})
-
-                # ✅ Set the book as sold
+            if book.is_sold: raise ValidationError({"error": "This book has already been sold."})
             book.is_sold = True
             book.save()
 
@@ -116,8 +106,7 @@ class BuyBookAPIView(generics.CreateAPIView):
             raise ValidationError({"error": "Invalid user ID."})
         except Book.DoesNotExist:
             raise ValidationError({"error": "Invalid book ID."})
-        if book.seller == user:
-            raise ValidationError({"error": "You cannot buy your own book."})
+        if book.seller == user: raise ValidationError({"error": "You cannot buy your own book."})
         if book.book_type in ["free_book", "pdf"] and book.read_access == "free":
             return Response(
                 {"message": "You can access this book for free.",
@@ -277,8 +266,6 @@ class ConfirmTransactionView(RetrieveAPIView):
         transaction = self.get_queryset().filter(id=transaction_id).first()
         if not transaction:
             return Response({'message': 'Transaction not found.'}, status=status.HTTP_404_NOT_FOUND)
-        if transaction.otp != otp:
-            return Response({'message': 'Invalid OTP!'}, status=status.HTTP_400_BAD_REQUEST)
         transaction.status = 'completed'
         transaction.book.is_sold = True
         transaction.save()
