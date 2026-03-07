@@ -28,6 +28,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
         
-    - name: Run Tests 
-      working-directory: alphabook
-      run: python manage.py test
+    - name: Run Tests
+      run: |
+         cd alpha_book_backend/alphabook
+         python manage.py test
