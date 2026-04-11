@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from django.conf.global_settings import AUTH_USER_MODEL
 
@@ -88,12 +92,14 @@ WSGI_APPLICATION = 'alphabook.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+print("DB URL:", os.getenv("DATABASE_URL"))
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.getenv('DATABASE_URL'),
+        conn_max_age=600)
+}
+
+DATABASES['default']['OPTIONS'] = {
+    'sslmode': 'require',
 }
 
 

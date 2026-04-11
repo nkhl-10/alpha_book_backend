@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 
 from .models import User, Book, Transaction, Category, Address
 from .models.book import BookImage
+from .utils.supabase_upload import upload_file
 from .serializers import RegisterSerializer, BookImageSerializer, CategorySerializer, UserAvatarSerializer, \
     AddressSerializer, BookUploadSerializer
 from .serializers import UserSerializer, BookSerializer, TransactionSerializer
@@ -60,12 +61,19 @@ class BookListCreateAPIView(generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         try:
             images_data = request.FILES.getlist('images')
-            book_data = request.data
+            pdf_file = request.FILES.get('pdf_file')
+            
+            book_data = request.data.copy()
+            if pdf_file:
+                book_data['pdf_file'] = upload_file(pdf_file)
+                
             book_serializer = self.get_serializer(data=book_data)
             book_serializer.is_valid(raise_exception=True)
             book = book_serializer.save()
+            
             for image_data in images_data:
-                BookImage.objects.create(book=book, image=image_data)
+                image_url = upload_file(image_data)
+                BookImage.objects.create(book=book, image=image_url)
 
             return Response(book_serializer.data, status=status.HTTP_201_CREATED)
 
@@ -212,21 +220,26 @@ class SearchBookAPIView(generics.ListAPIView):
 @parser_classes([MultiPartParser, FormParser])
 def upload_avatar(request):
     user_id = request.data.get("user_id")
+    avatar_file = request.FILES.get("avatar")
+    
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = UserAvatarSerializer(user, data=request.data, partial=True)
+    if avatar_file:
+        try:
+            avatar_url = upload_file(avatar_file)
+            user.avatar = avatar_url
+            user.save()
+            return Response(
+                {"message": "Avatar uploaded successfully", "avatar": user.avatar},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response({"error": f"Upload failed: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    if serializer.is_valid():
-        serializer.save()
-        return Response(
-            {"message": "Avatar uploaded successfully", "avatar": user.avatar.url},
-            status=status.HTTP_200_OK
-        )
-
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"error": "No avatar file provided"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AddressListCreateView(generics.ListCreateAPIView):
