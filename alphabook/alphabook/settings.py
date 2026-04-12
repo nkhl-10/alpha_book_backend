@@ -35,6 +35,12 @@ ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'api.User'
 
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://alpha-book-backend.onrender.com",
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
